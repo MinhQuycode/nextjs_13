@@ -1,0 +1,13 @@
+export const delay = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export default async function getMovie(movieId: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US&page=1`
+  );
+  if (!res.ok) {
+    throw new Error(`An error has occured: ${res.status}`);
+  }
+  return res.json();
+}
